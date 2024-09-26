@@ -85,7 +85,7 @@ function App() {
 
     try {
       const analysis = await analyzeTone(text);
-      setResult(analysis.tone);
+      setResult(analysis);
       setError('');
       setShowResult(true);
     } catch (err) {
@@ -100,6 +100,7 @@ function App() {
       <div className="content">
         <div className={`input-container ${showResult ? 'shifted' : ''}`}>
           <TextInput value={text} onChange={handleTextChange} />
+        </div>
         <div className="actions-container">
           <ImportButton onFileImport={handleFileImport} />
           
@@ -110,12 +111,17 @@ function App() {
         </div>
       </div>
 
-        <div className={`result-container ${showResult ? 'visible' : ''}`}>
-          {result && <ResultDisplay result={result} />}
+      <div className={`result-container ${showResult ? 'visible' : ''}`}>
+        {result && (
+          <div className="result-display">
+            <h2>Результат анализа:</h2>
+            <p>Тональность: {result.documentSentiment.score}</p>
+            <p>Эмоциональная окраска: {result.documentSentiment.magnitude}</p>
+          </div>
+        )}
           {error && <p className="error">{error}</p>}
         </div>
       </div>
-    </div>
   );
 }
 

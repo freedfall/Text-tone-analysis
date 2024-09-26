@@ -29,7 +29,7 @@ h1 {
   width: 1400px;
   border: 2px solid #ddd;
   border-radius: 30px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0px 2px rgba(0, 0, 0, 0.4);
   overflow: hidden;
 }
 
@@ -104,11 +104,10 @@ h1 {
 .result-container {
   width: 1400px;
   height: 700px;
-  margin-left: 30px;
-  padding: 20px;
+  padding-top: 30px;
   background-color: #fff;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   opacity: 0;
   transform: translateX(50px);
   transition: all 0.5s ease;
