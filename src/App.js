@@ -3,7 +3,8 @@ import TextInput from './components/TextInput';
 import Button from './components/Button';
 import ResultDisplay from './components/ResultDisplay';
 import ImportButton from './components/ImportButton';
-import { analyzeTone } from './services/toneAnalyzer';
+// import { analyzeTone } from './services/toneAnalyzer';
+import { analyzeToneIBM } from './services/toneAnalyzer';
 import './App.css';
 
 const MAX_CHARS = 3000;
@@ -84,7 +85,7 @@ function App() {
     }
 
     try {
-      const analysis = await analyzeTone(text);
+      const analysis = await analyzeToneIBM(text);
       setResult(analysis);
       setError('');
       setShowResult(true);
@@ -113,10 +114,28 @@ function App() {
 
       <div className={`result-container ${showResult ? 'visible' : ''}`}>
         {result && (
-          <div className="result-display">
-            <h2>Результат анализа:</h2>
-            <p>Тональность: {result.documentSentiment.score}</p>
-            <p>Эмоциональная окраска: {result.documentSentiment.magnitude}</p>
+          <div className="analysis-result">
+            <h2>Results</h2>
+
+            {/* Overall  mood*/}
+            <h3>Emotional tone</h3>
+            {result.sentiment && (
+              <p>
+                Оценка: {Math.round(result.sentiment.document.score * 100)}% 
+                ({result.sentiment.document.label})
+              </p>
+            )}
+
+            {/*Emotions */}
+            {result.emotion && (
+              <ul> 
+                {Object.entries(result.emotion.document.emotion).map(([emotion, value]) => (
+                  <li key={emotion}>
+                    {emotion}: {Math.round(value * 100)}%
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         )}
           {error && <p className="error">{error}</p>}
