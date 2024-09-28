@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TextInput from './components/TextInput';
 import Button from './components/Button';
 import ResultDisplay from './components/ResultDisplay';
+import MoodChart from './components/MoodChart';
 import ImportButton from './components/ImportButton';
 // import { analyzeTone } from './services/toneAnalyzer';
 import { analyzeToneIBM } from './services/toneAnalyzer';
@@ -117,24 +118,12 @@ function App() {
           <div className="analysis-result">
             <h2>Results</h2>
 
-            {/* Overall  mood*/}
-            <h3>Emotional tone</h3>
             {result.sentiment && (
-              <p>
-                Оценка: {Math.round(result.sentiment.document.score * 100)}% 
-                ({result.sentiment.document.label})
-              </p>
-            )}
-
-            {/*Emotions */}
-            {result.emotion && (
-              <ul> 
-                {Object.entries(result.emotion.document.emotion).map(([emotion, value]) => (
-                  <li key={emotion}>
-                    {emotion}: {Math.round(value * 100)}%
-                  </li>
-                ))}
-              </ul>
+              <MoodChart 
+                score={result.sentiment.document.score} 
+                label={result.sentiment.document.label}
+                emotions={result.emotion.document.emotion}
+            />
             )}
           </div>
         )}

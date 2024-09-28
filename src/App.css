@@ -7,6 +7,10 @@ body {
   align-items: center;
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
 .App {
   padding: 40px;
   border-radius: 15px;
@@ -34,7 +38,7 @@ h1 {
 }
 
 .text-input {
-  width: 100%;
+  width: 96%;
   height: 800px;
   border: none;
   font-size: 2.5rem;
@@ -54,6 +58,7 @@ h1 {
   justify-content:space-between;
   padding: 30px;
   padding-bottom: 10px;
+  align-items: center;
 }
 
 .import-button {
@@ -103,15 +108,14 @@ h1 {
 
 .result-container {
   width: 1400px;
-  height: 700px;
-  padding-top: 30px;
+  padding-top: 10px;
   background-color: #fff;
   border-radius: 30px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   opacity: 0;
-  transform: translateX(50px);
-  transition: all 0.5s ease;
-  display: none;
+  transition: all 0.8s ease-in-out;
+  transform: translateX(-100%);
+  /* display: none; */
   margin-top: 10%;
 }
 
@@ -121,31 +125,66 @@ h1 {
   transform: translateX(0);
 }
 
-.result {
-  font-size: 18px;
-  padding: 15px;
+.analysis-result{
+  font-size: 1.5rem;
+  padding: 5%;
+  padding-top: 1%;
+}
+
+.mood-chart{
+  width: 100%;
+  height: 100%;
+  padding-bottom: 10%;
+}
+
+.mood-chart-container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.analysis-result canvas{
+  width: 100%;
+  height: 100%;
+}
+
+.analysis-result h3{
+  font-size: 2rem;
+  
+}
+
+.emotion-icon {
+  font-size: 3rem;
+}
+
+.emotion-row {
+  display: flex;
+  align-items: center;
+  padding-bottom: 5%;
+}
+
+.emotion-label {
+  font-size: 2rem;
+  padding-right: 10px;
+  width: 100px;
+}
+
+.squares-container {
+  display: flex;
+  margin-left: 10px;
+}
+
+.square {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 5px;
+  border: 1px solid #ccc;
   border-radius: 10px;
-  background-color: #f5f5f5;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.result.positive {
-  background-color: #e0ffe0;
-  color: #008000;
+.square.filled {
+  background-color: #4caf50; /* Заполненный квадрат */
 }
 
-.result.negative {
-  background-color: #ffe0e0;
-  color: #ff0000;
-}
-
-.result.neutral {
-  background-color: #e0e0e0;
-  color: #808080;
-}
-
-.error {
-  color: #ff0000;
-  margin-top: 10px;
-  font-weight: bold;
+.square.empty {
+  background-color: transparent; /* Пустой квадрат */
 }
