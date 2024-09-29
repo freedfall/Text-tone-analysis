@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import TextInput from './components/TextInput';
 import Button from './components/Button';
-import ResultDisplay from './components/ResultDisplay';
 import MoodChart from './components/MoodChart';
 import ImportButton from './components/ImportButton';
 // import { analyzeTone } from './services/toneAnalyzer';
@@ -87,6 +86,11 @@ function App() {
 
     try {
       const analysis = await analyzeToneIBM(text);
+      if (!analysis) {
+        setError('No analysis result.');
+        setShowResult(true);
+        return;
+      }
       setResult(analysis);
       setError('');
       setShowResult(true);
@@ -99,37 +103,39 @@ function App() {
   return (
     <div className="App">
       <h1>Text tone analyzer</h1>
-      <div className="content">
-        <div className={`input-container ${showResult ? 'shifted' : ''}`}>
-          <TextInput value={text} onChange={handleTextChange} />
-        </div>
-        <div className="actions-container">
-          <ImportButton onFileImport={handleFileImport} />
-          
-          <div className={`word-counter ${charCount > MAX_CHARS ? 'limit-exceeded' : ''}`}>
-            {charCount} / {MAX_CHARS}
+      <div className="main-container">
+        <div className={`content ${showResult ? 'shifted' : ''}`}>
+          <div className={`input-container ${showResult ? 'shifted' : ''}`}>
+            <TextInput value={text} onChange={handleTextChange} />
           </div>
-          <Button onClick={handleAnalyze} />
+          <div className="actions-container">
+            <ImportButton onFileImport={handleFileImport} />
+            
+            <div className={`word-counter ${charCount > MAX_CHARS ? 'limit-exceeded' : ''}`}>
+              {charCount} / {MAX_CHARS}
+            </div>
+            <Button onClick={handleAnalyze} />
+          </div>
+        </div>
+
+        <div className={`result-container ${showResult ? 'visible' : ''}`}>
+          {result && (
+            <div className="analysis-result">
+
+              {/* Overall  mood*/}
+              {result.sentiment && (
+                <MoodChart 
+                  score={result.sentiment.document.score} 
+                  label={result.sentiment.document.label}
+                  emotions={result.emotion.document.emotion}
+              />
+              )}
+            </div>
+          )}
+            {error && <p className="error">{error}</p>}
         </div>
       </div>
-
-      <div className={`result-container ${showResult ? 'visible' : ''}`}>
-        {result && (
-          <div className="analysis-result">
-            <h2>Results</h2>
-
-            {result.sentiment && (
-              <MoodChart 
-                score={result.sentiment.document.score} 
-                label={result.sentiment.document.label}
-                emotions={result.emotion.document.emotion}
-            />
-            )}
-          </div>
-        )}
-          {error && <p className="error">{error}</p>}
-        </div>
-      </div>
+    </div>
   );
 }
 

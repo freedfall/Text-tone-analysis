@@ -40,9 +40,10 @@ const renderSquares = (percentage) => {
 
 const MoodChart = ({ score, label, emotions }) => {
   const colorRed = 'rgba(255, 99, 132, 1)';
-  const colorGreen = 'rgba(75, 192, 192, 1)';
+  const colorGreen = 'rgba(76, 245, 181, 1)';
   const colorYellow = 'rgba(255, 205, 86, 1)';
   let backgroundColor;
+
   if (label === 'positive') {
     backgroundColor = colorGreen;
   } else if (label === 'negative') {
@@ -55,7 +56,7 @@ const MoodChart = ({ score, label, emotions }) => {
     labels: ['Mood'],
     datasets: [
       {
-        label: 'Primary emotional tone',
+        label: 'Overall emotional tone',
         data: [score * 100], // display as percentage
         backgroundColor: [backgroundColor],
         barThickness: 100,
@@ -88,7 +89,7 @@ const MoodChart = ({ score, label, emotions }) => {
             size: 35,
             weight: 500,
           },
-          stepSize: 50,
+          stepSize: 100,
         },
       },
     },
@@ -114,14 +115,14 @@ const MoodChart = ({ score, label, emotions }) => {
   };
 
   return (
-    <div className="mood-chart-container" style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
-      <div className="mood-chart" style={{ width: '400px', height: '600px' }}>
-        <h3>Primary emotional tone: {label}</h3>
-        <Bar data={data} options={options} height={800} width={200} />
+    <div className="mood-chart-container">
+      <div className="mood-chart">
+        {/* <h3>Primary emotional tone: {label}</h3> */}
+        <Bar data={data} options={options} />
       </div>
 
       <div className="emotions-visualization">
-        <h3>Emotions</h3>
+        {/* <h3>Emotions</h3> */}
         <ul style={{ listStyle: 'none', padding: 0 }}>
           {Object.entries(emotions).map(([emotion, value]) => (
             <li key={emotion} className="emotion-row">

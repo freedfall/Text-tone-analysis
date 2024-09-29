@@ -1,10 +1,13 @@
 body {
   margin: 0;
+  padding: 0;
   font-family: 'Roboto', sans-serif;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #292b2f;
+  overflow: hidden;
 }
 
 html{
@@ -12,16 +15,20 @@ html{
 }
 
 .App {
-  padding: 40px;
   border-radius: 15px;
   text-align: center;
   width: 100%;
 }
 
 h1 {
-  color: black;
-  margin-bottom: 30px;
-  font-size: 5rem;
+  color: white;
+  font-size: 3rem;
+}
+
+.main-container {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
 }
 
 .input-container {
@@ -30,42 +37,54 @@ h1 {
 }
 
 .content{
-  width: 1400px;
-  border: 2px solid #ddd;
+  width: 40%;
+  height: 70vh;
   border-radius: 30px;
   box-shadow: 0 0px 2px rgba(0, 0, 0, 0.4);
   overflow: hidden;
+  transform: translateX(80%);
+  transition: all 0.8s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #99aab5;
+}
+
+.content.shifted {
+  transform: translateX(10%);
 }
 
 .text-input {
   width: 96%;
-  height: 800px;
+  height: 59vh;
   border: none;
-  font-size: 2.5rem;
+  font-size: 1.4rem;
   outline: none;
   transition: all 0.3s ease;
   overflow-wrap: break-word;
   white-space: normal;
   line-height: 1.5;
-  padding: 40px;
+  padding: 3%;
   text-align: left;
   vertical-align: top;
+  background-color: #99aab5;
+  color: white;
 }
 
 .actions-container{
   width: 100%;
   display: flex;
   justify-content:space-between;
-  padding: 30px;
-  padding-bottom: 10px;
+  padding: 0 0 2% 0;
   align-items: center;
 }
 
 .import-button {
-  padding: 15px 35px;
-  background: linear-gradient(135deg, #6a0dad, #ff00ff);
+  padding: 1.5% 5%;
+  background: linear-gradient(135deg, #6a0dad, #5740A3);
   color: white;
   font-size: 1.5rem;
+  margin-left: 2%;
   border: none;
   border-radius: 30px;
   cursor: pointer;
@@ -86,9 +105,9 @@ h1 {
 }
 
 .check-button {
-  padding: 15px 70px;
-  margin-right: 40px;
-  background: linear-gradient(135deg, #6a0dad, #ff00ff);
+  padding: 1.5% 10%;
+  margin-right: 2%;
+  background: linear-gradient(135deg, #6a0dad, #5740A3);
   color: white;
   font-size: 1.5rem;
   border: none;
@@ -107,49 +126,42 @@ h1 {
 }
 
 .result-container {
-  width: 1400px;
+  width: 50%;
+  height: 70vh;
   padding-top: 10px;
-  background-color: #fff;
+  background-color: #99aab5;
   border-radius: 30px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   opacity: 0;
   transition: all 0.8s ease-in-out;
-  transform: translateX(-100%);
-  /* display: none; */
-  margin-top: 10%;
+  transform: translateX(100%);
 }
 
 .result-container.visible {
-  display: block;
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(-5%);
 }
 
 .analysis-result{
-  font-size: 1.5rem;
+  font-size: 1rem;
   padding: 5%;
-  padding-top: 1%;
 }
 
 .mood-chart{
-  width: 100%;
-  height: 100%;
+  width: 40%;
+  height: 60vh;
   padding-bottom: 10%;
 }
 
 .mood-chart-container{
   display: flex;
   justify-content: space-between;
-}
-
-.analysis-result canvas{
-  width: 100%;
-  height: 100%;
+  align-items: center;
 }
 
 .analysis-result h3{
-  font-size: 2rem;
-  
+  font-size: 1.5rem;
+  color: white;
 }
 
 .emotion-icon {
@@ -162,8 +174,9 @@ h1 {
   padding-bottom: 5%;
 }
 
+
 .emotion-label {
-  font-size: 2rem;
+  font-size: 1rem;
   padding-right: 10px;
   width: 100px;
 }
@@ -174,17 +187,17 @@ h1 {
 }
 
 .square {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2rem;
+  height: 2rem;
   margin-right: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(0, 0, 0, 0.15);
   border-radius: 10px;
 }
 
 .square.filled {
-  background-color: #4caf50; /* Заполненный квадрат */
+  background-color: #4caf50;
 }
 
 .square.empty {
-  background-color: transparent; /* Пустой квадрат */
+  background-color: transparent;
 }

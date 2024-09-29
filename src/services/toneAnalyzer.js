@@ -5,7 +5,7 @@ export const analyzeToneIBM = async (text) => {
     const response = await axios.post('http://localhost:4000/analyze-tone', { text });
     return response.data;
   } catch (error) {
-    console.error('Ошибка при запросе к прокси-серверу:', error);
+    console.error('Error sending request to proxy server: ', error);
     throw error;
   }
 };
