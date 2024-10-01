@@ -22,8 +22,8 @@ function App() {
    * @returns {number} - number of characters without white spaces in the input text 
    */
   const countChars = (inputText) => {
-    const wordsArray = inputText.trim().split();
-    return wordsArray.filter(word => word.length > 0).length;
+    const charsArray = inputText.trim().split();
+    return charsArray.filter(word => word.length > 0).length;
   };
 
   /**
@@ -55,20 +55,20 @@ function App() {
 
       reader.onload = (event) => {
         const fileText = event.target.result;
-        const words = countChars(fileText);
+        const chars = countChars(fileText);
 
-        if (words <= MAX_CHARS) {
+        if (chars <= MAX_CHARS) {
           setText(fileText);
-          setCharCount(words);
+          setCharCount(chars);
         } else {
           alert(`Max chars count exedeed: ${MAX_CHARS}`);
         }
       };
 
-      if (file.type === "text/plain" || file.type === "application/pdf") {
+      if (file.type === "text/plain") {
         reader.readAsText(file);
       } else {
-        alert("Please select .txt or .pdf file");
+        alert("Please select .txt file.");
       }
     }
   };
@@ -86,19 +86,26 @@ function App() {
 
     try {
       const analysis = await analyzeToneIBM(text);
-      if (!analysis) {
-        setError('No analysis result.');
+      
+      if (analysis.language !== 'en') {
+        setError('Only English text is supported.');
+        setResult(null);
         setShowResult(true);
         return;
       }
-      setResult(analysis);
-      setError('');
-      setShowResult(true);
+      else{
+        setResult(analysis);
+        setError('');
+        setShowResult(true);
+      }
+
+      
     } catch (err) {
-      setError('An error occurred while analyzing the text.');
+      setError('An error occurred while analyzing the text: ' + err.response.data.error);
       setShowResult(true); 
     }
   };
+
 
   return (
     <div className="App">

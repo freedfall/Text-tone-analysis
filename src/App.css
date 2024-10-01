@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Halvar';
+  src: url('./fonts/HalvarBreit-Lt.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 body {
   margin: 0;
   padding: 0;
@@ -8,6 +14,7 @@ body {
   align-items: center;
   background-color: #292b2f;
   overflow: hidden;
+  font-family: 'Halvar';
 }
 
 html{
@@ -21,8 +28,13 @@ html{
 }
 
 h1 {
+  font: 4rem 'Halvar';
   color: white;
-  font-size: 3rem;
+  user-select: none;
+}
+
+h1:hover {
+  color: linear-gradient(20deg, #801FDB, #BE1FDB);
 }
 
 .main-container {
@@ -37,12 +49,12 @@ h1 {
 }
 
 .content{
-  width: 40%;
+  width: 50%;
   height: 70vh;
   border-radius: 30px;
   box-shadow: 0 0px 2px rgba(0, 0, 0, 0.4);
   overflow: hidden;
-  transform: translateX(80%);
+  transform: translateX(50%);
   transition: all 0.8s ease-in-out;
   display: flex;
   flex-direction: column;
@@ -51,6 +63,7 @@ h1 {
 }
 
 .content.shifted {
+  width: 40%;
   transform: translateX(10%);
 }
 
@@ -75,7 +88,7 @@ h1 {
   width: 100%;
   display: flex;
   justify-content:space-between;
-  padding: 0 0 2% 0;
+  padding: 0 0 1% 0;
   align-items: center;
 }
 
@@ -110,6 +123,7 @@ h1 {
   background: linear-gradient(135deg, #6a0dad, #5740A3);
   color: white;
   font-size: 1.5rem;
+  font-family: 'Halvar';
   border: none;
   border-radius: 30px;
   cursor: pointer;
@@ -166,6 +180,7 @@ h1 {
 
 .emotion-icon {
   font-size: 3rem;
+  user-select: none;
 }
 
 .emotion-row {
@@ -181,23 +196,30 @@ h1 {
   width: 100px;
 }
 
-.squares-container {
-  display: flex;
-  margin-left: 10px;
-}
-
 .square {
   width: 2rem;
   height: 2rem;
   margin-right: 5px;
-  border: 1px solid rgb(0, 0, 0, 0.15);
-  border-radius: 10px;
+  border: 2px solid #ccc;
+  border-radius: 35%;
 }
 
 .square.filled {
-  background-color: #4caf50;
+  background: linear-gradient(20deg, #801FDB, #BE1FDB);
+  transition: all 0.3s ease-in-out;
 }
 
+.square.filled:hover {
+  transform: scale(1.1);
+}
+
+/* 
 .square.empty {
   background-color: transparent;
+} */
+
+.error {
+  color: red;
+  font-size: 3rem;
+  font-weight: bold;
 }
