@@ -12,7 +12,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #292b2f;
+  /* background-color: #292b2f; */
+  background-color: #7e7e7e;
   overflow: hidden;
   font-family: 'Halvar';
 }
@@ -59,7 +60,9 @@ h1:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #99aab5;
+  /* background-color: #99aab5; */
+  background-color: rgba(217, 217, 217, 1);
+  gap: 0%;
 }
 
 .content.shifted {
@@ -69,7 +72,7 @@ h1:hover {
 
 .text-input {
   width: 96%;
-  height: 59vh;
+  height: 58vh;
   border: none;
   font-size: 1.4rem;
   outline: none;
@@ -77,29 +80,33 @@ h1:hover {
   overflow-wrap: break-word;
   white-space: normal;
   line-height: 1.5;
-  padding: 3%;
+  padding: 3% 5% 0 4%;
+  padding-bottom: 0;
   text-align: left;
   vertical-align: top;
-  background-color: #99aab5;
-  color: white;
+  /* background-color: #99aab5; */
+  background-color: rgba(217, 217, 217, 1);
+  /* color: white; */
+  color: rgba(69, 69, 69, 1);
 }
 
 .actions-container{
   width: 100%;
   display: flex;
   justify-content:space-between;
-  padding: 0 0 1% 0;
+  padding: 1% 0 3% 0;
   align-items: center;
 }
 
 .import-button {
-  padding: 1.5% 5%;
-  background: linear-gradient(135deg, #6a0dad, #5740A3);
+  padding: 1.5% 3%;
+  /* background: linear-gradient(135deg, #6a0dad, #5740A3); */
+  background: rgba(198, 68, 68, 1);
   color: white;
-  font-size: 1.5rem;
-  margin-left: 2%;
+  font-size: 1.7rem;
+  margin-left: 3%;
   border: none;
-  border-radius: 30px;
+  border-radius: 40px;
   cursor: pointer;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
@@ -118,14 +125,15 @@ h1:hover {
 }
 
 .check-button {
-  padding: 1.5% 10%;
-  margin-right: 2%;
-  background: linear-gradient(135deg, #6a0dad, #5740A3);
+  padding: 1.5% 5%;
+  margin-right: 3%;
+  /* background: linear-gradient(135deg, #6a0dad, #5740A3); */
+  background: rgba(198, 68, 68, 1);
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-family: 'Halvar';
   border: none;
-  border-radius: 30px;
+  border-radius: 40px;
   cursor: pointer;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
@@ -143,7 +151,8 @@ h1:hover {
   width: 50%;
   height: 70vh;
   padding-top: 10px;
-  background-color: #99aab5;
+  /* background-color: #99aab5; */
+  background-color: rgba(217, 217, 217, 1);
   border-radius: 30px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   opacity: 0;
@@ -162,9 +171,8 @@ h1:hover {
 }
 
 .mood-chart{
-  width: 40%;
+  width: 50%;
   height: 60vh;
-  padding-bottom: 10%;
 }
 
 .mood-chart-container{
@@ -179,6 +187,7 @@ h1:hover {
 }
 
 .emotion-icon {
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji';
   font-size: 3rem;
   user-select: none;
 }
@@ -186,40 +195,73 @@ h1:hover {
 .emotion-row {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 5%;
   padding-bottom: 5%;
+  width: 100%;
 }
 
-
-.emotion-label {
-  font-size: 1rem;
-  padding-right: 10px;
-  width: 100px;
+.progressBar{
+  background-color: rgba(198, 68, 68, 1);
+  border-radius: 2rem;
 }
 
-.square {
-  width: 2rem;
-  height: 2rem;
-  margin-right: 5px;
-  border: 2px solid #ccc;
-  border-radius: 35%;
-}
-
-.square.filled {
-  background: linear-gradient(20deg, #801FDB, #BE1FDB);
+.progressContainer{
+  width: 15vw;
+  height: 4vh;
+  background-color: rgba(197, 190, 190, 1);
+  border-radius: 2rem;
+  overflow: hidden;
   transition: all 0.3s ease-in-out;
 }
 
-.square.filled:hover {
-  transform: scale(1.1);
+.progressContainer:hover{
+  transform: scale(1.05);
 }
-
-/* 
-.square.empty {
-  background-color: transparent;
-} */
 
 .error {
   color: red;
   font-size: 3rem;
   font-weight: bold;
+}
+
+
+@media screen and (max-width: 1900px) {
+  body{
+    overflow: visible;
+  }
+  .App {
+    overflow: visible;
+  }
+  .main-container{
+    flex-direction: column;
+    align-items: center;
+    overflow: visible;
+  }
+
+  .content{
+    width: 70%;
+    transform: translateX(0);
+  }
+
+  .content.shifted {
+    width: 70%;
+    transform: translateX(0);
+    margin-bottom: 5%;
+  }
+  
+  .actions-container{
+    width: 100%;
+    padding: 0% 0 2% 0;
+    align-items: center;
+  }
+
+  .result-container {
+    width: 70%;
+    transform: translateX(0);
+  }
+
+  .result-container.visible {
+    transform: translateX(0);
+  }
 }

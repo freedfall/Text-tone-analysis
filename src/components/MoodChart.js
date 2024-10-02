@@ -10,86 +10,119 @@ import {
   CategoryScale,
 } from 'chart.js';
 
+
 ChartJS.register(LinearScale, BarElement, Title, Tooltip, Legend, CategoryScale);
 
 const emotionIcons = {
-  sadness: '😢',
+  sadness: '😭',
   joy: '😊',
   fear: '😨',
   disgust: '🤢',
   anger: '😠',
 };
 
-// generate squares array for each emotion
-const renderSquares = (percentage) => {
-  const filledSquares = Math.round(percentage * 10); // convert percentage to number of squares
-  const squares = [];
+/**
+ * Custom plugin to draw background color on the canvas
+ */
+const backgroundPlugin = {
+  id: 'customCanvasBackgroundColor',
+  beforeDraw: (chart) => {
+    const { ctx, chartArea } = chart;
+    const backgroundColor = 'rgba(197, 190, 190, 1)';
 
-  // add filled squares
-  for (let i = 0; i < filledSquares; i++) {
-    squares.push(<div key={`filled-${i}`} className="square filled"></div>);
-  }
+    ctx.save();
+    ctx.fillStyle = backgroundColor;
+    // adaptive bar width
+    const barWidth = chart.getDatasetMeta(0).data[0].width / 2;
 
-  // add empty squares
-  for (let i = filledSquares; i < 10; i++) {
-    squares.push(<div key={`empty-${i}`} className="square empty"></div>);
-  }
-
-  return squares;
+    const barOffset = 0; // Центрируем фон
+    ctx.fillRect(chartArea.left + barOffset, chartArea.top, barWidth, chartArea.height+50);
+    ctx.restore();
+  },
 };
 
-const MoodChart = ({ score, label, emotions }) => {
-  const colorRed = 'rgba(255, 99, 132, 1)';
-  const colorGreen = 'rgba(76, 245, 181, 1)';
-  const colorYellow = 'rgba(255, 205, 86, 1)';
-  let backgroundColor;
+/**
+ * Render progress bars to visualize emotion intensity
+ * @param {number} percentage - emotion intensity percentage
+ */
+const renderProgressBar = (percentage) => {
+  const progressBarStyles = {
+    width: `${percentage * 100}%`, // Процент заполнения полоски
+    height: '100%', // Высота полоски
+  };
 
+  return (
+    <div className='progressContainer'>
+      <div className='progressBar' style={progressBarStyles}></div>
+    </div>
+  );
+};
+
+/**
+ * MoodChart component
+ * @param {Object} props - component props
+ * @param {number} props.score - overall emotional tone score
+ * @param {string} props.label - overall emotional tone label
+ * @param {Object} props.emotions - emotions detected
+ * @returns {JSX.Element} - MoodChart component
+ * 
+ */
+const MoodChart = ({ score, label, emotions }) => {
+  let barColor;
   if (label === 'positive') {
-    backgroundColor = colorGreen;
+    barColor = 'rgba(157, 236, 129, 1)';
   } else if (label === 'negative') {
-    backgroundColor = colorRed; 
+    barColor = 'rgba(243, 86, 86, 1)';
   } else {
-    backgroundColor = colorYellow;
+    barColor = 'rgba(255, 205, 86, 1)';
   }
 
+  // chart data
   const data = {
     labels: ['Mood'],
     datasets: [
       {
         label: 'Overall emotional tone',
-        data: [score * 100], // display as percentage
-        backgroundColor: [backgroundColor],
-        barThickness: 100,
+        data: [score * 100],
+        backgroundColor: [barColor],
+        barThickness: 'flex', //adaptive bar width
       },
     ],
   };
 
-  const options = {
+  // chart options
+  const options = { 
     responsive: true,
     maintainAspectRatio: false,
     scales: {
       x: {
         display: false,
+        offset: false,
       },
       y: {
-        beginAtZero: true,
         min: -100,
         max: 100,
         grid: {
           display: false,
         },
+        border: {
+          display: false,
+        },
         ticks: {
+          padding: 20,
+          align: 'start',
+          color: 'black',
+          font: {
+            size: 40,
+            weight: 550,
+          },
+          stepSize: 100,
           callback: (value) => {
             if (value === 100) return 'Positive';
             if (value === -100) return 'Negative';
             if (value === 0) return 'Neutral';
             return `${value}%`;
           },
-          font: {
-            size: 35,
-            weight: 500,
-          },
-          stepSize: 100,
         },
       },
     },
@@ -117,23 +150,18 @@ const MoodChart = ({ score, label, emotions }) => {
   return (
     <div className="mood-chart-container">
       <div className="mood-chart">
-        {/* <h3>Primary emotional tone: {label}</h3> */}
-        <Bar data={data} options={options} />
+        <Bar data={data} options={options} plugins={[backgroundPlugin]} />
       </div>
 
       <div className="emotions-visualization">
-        {/* <h3>Emotions</h3> */}
         <ul style={{ listStyle: 'none', padding: 0 }}>
           {Object.entries(emotions).map(([emotion, value]) => (
             <li key={emotion} className="emotion-row">
               <span className="emotion-icon">
                 {emotionIcons[emotion]}
               </span>
-              {/* <span className="emotion-label">
-                {Math.round(value * 100)}%
-              </span> */}
-              <div className="squares-container" style={{ display: 'flex', marginLeft: '10px' }}>
-                {renderSquares(value)}
+              <div>
+                {renderProgressBar(value)}
               </div>
             </li>
           ))}

@@ -15,8 +15,8 @@ export const analyzeToneIBM = async (text) => {
       data: { 
         text: text,
         features: {
-          sentiment: {},
-          emotion: {},
+          sentiment: {}, // overall emotional tone
+          emotion: {},  // emotions detected
         },
       },
     });
