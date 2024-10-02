@@ -4,14 +4,13 @@
 
 This project is designed to analyze the emotional tone of the input text and visualize it. It integrates **IBM Watson Natural Language Understanding API** for emotion analysis and allows users to upload text files or input text manually.
 
-## Technologies
+### Outline
 
-- **React**: A JavaScript library for building user interfaces.
-- **Chart.js**: A simple yet flexible JavaScript charting library.
-- **IBM Watson Natural Language Understanding API**: Used for emotion detection in text.
-- **JavaScript**: Core language for the logic and behavior of the application.
+* [Prerequisites](#prerequisites)
+* [Installation](#installation)
+* [Usage](#usage)
 
-## Prerequisites
+### Prerequisites
 
 Make sure you have the following installed on your machine:
 
@@ -22,14 +21,14 @@ Make sure you have the following installed on your machine:
 
 Follow these steps to run the project locally:
 
-    * Clone the Repository
+  * Clone the Repository
 
     ```bash
-    git clone https://github.com/your-username/your-repository.git
-    cd your-repository
+    git clone https://github.com/freedfall/Text-tone-analysis.git
+    cd Text-tone-analysis
     ```
 
-    * Install Dependencies
+  * Install Dependencies
 
     In the project directory, run the following command to install the necessary packages:
 
@@ -37,7 +36,7 @@ Follow these steps to run the project locally:
     npm install
     ```
 
-    * IBM Watson Setup
+  * IBM Watson Setup
 
     To use IBM Watson Natural Language Understanding for emotion analysis, you need to set up your API key.
 
@@ -49,10 +48,13 @@ Follow these steps to run the project locally:
     4. After the service is created, navigate to the **Manage** tab.
     5. Copy your **API Key** and **Service URL**.
 
-    * Add API Key to `.env` File
+  * Add API Key to `.env` File
 
     1. In the root of your project directory, create a `.env` file (if it doesn't already exist).
-    2. Add your IBM Watson API key and URL to this file:
+       ```bash
+       touch .env
+       ```
+    3. Add your IBM Watson API key and URL to this file:
 
     ```plaintext
     REACT_APP_IBM_API_KEY=your-ibm-watson-api-key
@@ -61,7 +63,7 @@ Follow these steps to run the project locally:
 
     Replace **your-ibm-watson-api-key** and **your-ibm-service-url** with the values you obtained from the IBM Cloud.
 
-    * Start the Development Server
+  * Start the Development Server
 
     To start the project locally, use:
 
@@ -74,6 +76,4 @@ Follow these steps to run the project locally:
 ### Usage
 
 1. Open the project in your browser.
-2. Import a text file using the file upload input or manually type/paste text for analysis.
-3. The application will analyze the emotional tone using IBM Watson and display a bar chart with corresponding emoji icons and percentages for each emotion.
-4. The chart dynamically adjusts based on the analyzed text data.
+2. Import a text file using the file upload input or manually type/paste text for analysis and click **Check** button to view the result.
