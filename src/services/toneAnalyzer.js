@@ -4,6 +4,10 @@ export const analyzeToneIBM = async (text) => {
   const apiKey = process.env.REACT_APP_IBM_API_KEY;
   const apiUrl = process.env.REACT_APP_IBM_API_URL;
 
+  if (!apiKey || !apiUrl) {
+    throw new Error('IBM Watson API key or URL is missing.');
+  }
+
   try {
     const response = await axios({
       method: 'post',

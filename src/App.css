@@ -12,7 +12,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: #292b2f; */
   background-color: #7e7e7e;
   overflow: hidden;
   font-family: 'Halvar';
@@ -60,7 +59,6 @@ h1:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* background-color: #99aab5; */
   background-color: rgba(217, 217, 217, 1);
   gap: 0%;
 }
@@ -72,7 +70,7 @@ h1:hover {
 
 .text-input {
   width: 96%;
-  height: 58vh;
+  height: 59vh;
   border: none;
   font-size: 1.4rem;
   outline: none;
@@ -84,9 +82,7 @@ h1:hover {
   padding-bottom: 0;
   text-align: left;
   vertical-align: top;
-  /* background-color: #99aab5; */
   background-color: rgba(217, 217, 217, 1);
-  /* color: white; */
   color: rgba(69, 69, 69, 1);
 }
 
@@ -94,13 +90,12 @@ h1:hover {
   width: 100%;
   display: flex;
   justify-content:space-between;
-  padding: 1% 0 3% 0;
+  padding: 1% 0 2% 0;
   align-items: center;
 }
 
 .import-button {
   padding: 1.5% 3%;
-  /* background: linear-gradient(135deg, #6a0dad, #5740A3); */
   background: rgba(198, 68, 68, 1);
   color: white;
   font-size: 1.7rem;
@@ -127,7 +122,6 @@ h1:hover {
 .check-button {
   padding: 1.5% 5%;
   margin-right: 3%;
-  /* background: linear-gradient(135deg, #6a0dad, #5740A3); */
   background: rgba(198, 68, 68, 1);
   color: white;
   font-size: 1.7rem;
@@ -150,8 +144,6 @@ h1:hover {
 .result-container {
   width: 50%;
   height: 70vh;
-  padding-top: 10px;
-  /* background-color: #99aab5; */
   background-color: rgba(217, 217, 217, 1);
   border-radius: 30px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -222,7 +214,6 @@ h1:hover {
 .error {
   color: red;
   font-size: 3rem;
-  font-weight: bold;
 }
 
 

@@ -32,11 +32,9 @@ const backgroundPlugin = {
 
     ctx.save();
     ctx.fillStyle = backgroundColor;
-    // adaptive bar width
-    const barWidth = chart.getDatasetMeta(0).data[0].width / 2;
+    const barWidth = chart.getDatasetMeta(0).data[0].width / 2; // get bar width from the first dataset
 
-    const barOffset = 0; // Центрируем фон
-    ctx.fillRect(chartArea.left + barOffset, chartArea.top, barWidth, chartArea.height+50);
+    ctx.fillRect(chartArea.left, chartArea.top, barWidth, chartArea.height);
     ctx.restore();
   },
 };
@@ -47,8 +45,8 @@ const backgroundPlugin = {
  */
 const renderProgressBar = (percentage) => {
   const progressBarStyles = {
-    width: `${percentage * 100}%`, // Процент заполнения полоски
-    height: '100%', // Высота полоски
+    width: `${percentage * 100}%`,
+    height: '100%',
   };
 
   return (
@@ -110,13 +108,12 @@ const MoodChart = ({ score, label, emotions }) => {
         },
         ticks: {
           padding: 20,
-          align: 'start',
           color: 'black',
           font: {
             size: 40,
             weight: 550,
           },
-          stepSize: 100,
+          stepSize: 100, // display only labels at 0, 100, -100
           callback: (value) => {
             if (value === 100) return 'Positive';
             if (value === -100) return 'Negative';
